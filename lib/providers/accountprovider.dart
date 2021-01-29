@@ -5,11 +5,12 @@ class AccountProvider extends ChangeNotifier {
   Account account;
 
   void login(String name, String password) {
+    print('sdsdsds');
     if (name == 'dg' && password == 'dg') {
       account = Account()
         ..id = ''
         ..name = name;
-      notifyListeners;
+      notifyListeners();
     }
   }
 }
