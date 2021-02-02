@@ -1,5 +1,5 @@
-name: goubi
-description: A new Flutter project.
+name: digou
+description: A Shopping Application.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -49,8 +49,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets:
-   - assets/login_background.png
+  # assets:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
