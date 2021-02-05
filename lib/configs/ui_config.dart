@@ -36,6 +36,12 @@ final double size36 = 36.0;
 final double size40 = 40.0;
 final double size44 = 44.0;
 final double size48 = 48.0;
+final double size52 = 52.0;
+final double size56 = 56.0;
+final double size60 = 60.0;
+final double size64 = 64.0;
+final double size68 = 68.0;
+final double size72 = 72.0;
 //海拔
 final double evevation2 = 2.0;
 final double evevation4 = 4.0;
@@ -43,7 +49,7 @@ final double evevation6 = 6.0;
 final double evevation8 = 8.0;
 //颜色
 //主题
-final ThemeData defaultThemeData = ThemeData(buttonColor: Colors.red);
+final ThemeData defaultThemeData = ThemeData(primaryColor: Colors.indigoAccent,shadowColor: Colors.grey);
 //超链接
 final TextStyle linkStyle =
-    TextStyle(color: Colors.blue, decoration: TextDecoration.underline);
+    TextStyle(color: Colors.indigoAccent, decoration: TextDecoration.underline);

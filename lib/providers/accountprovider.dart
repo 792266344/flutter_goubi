@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flui/flui.dart';
 import 'package:digou/models/accountmodels/account.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,9 @@ class AccountProvider extends ChangeNotifier {
       FLToast.info(text: '请输入密码~');
     } else {
       _reverseIsLogining();
+      Dio().get('http://www.baidu.com').then((res){
+        print(res.data);
+      });
       Future.delayed(Duration(seconds: 3)).then((res) {
         account = Account()
           ..id = ''

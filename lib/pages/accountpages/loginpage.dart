@@ -14,54 +14,16 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _unInput = Selector<AccountProvider, bool>(
-        selector: (o, n) => true,
-        builder: (ctx, t, child) {
-          return TextField(
-            controller: _unCtl,
-            decoration: InputDecoration(
-              fillColor: Colors.grey[100],
-              filled: true,
-              prefixIcon: Icon(Icons.account_circle,
-                  color: Colors.red, size: size24.r),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.r, horizontal: 20.r),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-            ),
-          );
-        });
-    final _pwdInput = Selector<AccountProvider, bool>(
-        selector: (o, n) => true,
-        builder: (ctx, t, child) {
-          return TextField(
-            onSubmitted: (input) {
-              // channel.sink.add(input);
-            },
-            controller: _pwdCtl,
-            decoration: InputDecoration(
-              fillColor: Colors.grey[100],
-              filled: true,
-              prefixIcon: Icon(Icons.lock, color: Colors.red, size: size24.r),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.r, horizontal: 20.r),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-            ),
-          );
-        });
+    final _unInput = TextField(
+      controller: _unCtl,
+      decoration:
+          InputDecoration(prefixIcon: Icon(Icons.account_circle_outlined)),
+    );
+    final _pwdInput = TextField(
+      controller: _pwdCtl,
+      decoration: InputDecoration(
+          prefixIcon: Icon(IconData(0xe616, fontFamily: 'Male'))),
+    );
 
     final _loginBtn = Selector<AccountProvider, bool>(
         selector: (ctx, pro) => pro.isLogining,
@@ -70,8 +32,8 @@ class LoginPage extends StatelessWidget {
               child: Text('进入地狗'),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(circular24)),
-              color: Theme.of(ctx).buttonColor,
-              disabledColor: Theme.of(ctx).buttonColor,
+              color: Theme.of(ctx).primaryColor,
+              disabledColor: Theme.of(ctx).primaryColor,
               indicatorColor: Colors.white,
               textColor: Colors.white,
               loading: isLogining,
@@ -81,7 +43,6 @@ class LoginPage extends StatelessWidget {
               height: 45.r,
               indicatorOnly: true,
               onPressed: () =>
-                  // ctx.read<AppProvider>().nextThemeMode());
                   ctx.read<AccountProvider>().login(_unCtl.text, _pwdCtl.text));
         });
     return ChangeNotifierProvider<AccountProvider>(
@@ -90,8 +51,7 @@ class LoginPage extends StatelessWidget {
               resizeToAvoidBottomPadding: false,
               body: Container(
                 alignment: Alignment.topCenter,
-                decoration: BoxDecoration(
-                    color: Colors.red[300]),
+                decoration: BoxDecoration(color: Colors.white),
                 child: Container(
                     width: 350.r,
                     height: 310.r,
@@ -101,20 +61,20 @@ class LoginPage extends StatelessWidget {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.white.withOpacity(opacity40),
+                              color: Theme.of(ctx)
+                                  .shadowColor
+                                  .withOpacity(opacity40),
                               blurRadius: blurRadius8,
                               spreadRadius: blurRadius4)
                         ],
                         borderRadius: BorderRadius.circular(circular20)),
                     child: Column(
                       children: [
-                        Text('请登录您的地狗账号~',
-                            style: Theme.of(ctx)
-                                .textTheme
-                                .headline5
-                                .copyWith(fontWeight: FontWeight.w500)),
+                        Center(
+                            child: Icon(IconData(0xe75f,fontFamily: 'Animals'),
+                                color: Theme.of(ctx).primaryColor,size:size60)),
                         SizedBox(
-                          height: 18.r,
+                          height: 4.r,
                         ),
                         _unInput,
                         SizedBox(

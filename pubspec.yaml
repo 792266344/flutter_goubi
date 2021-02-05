@@ -49,6 +49,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: Male
+      fonts:
+        - asset: assets/icons/male_head.ttf
+    - family: FeMale
+      fonts:
+        - asset: assets/icons/female_head.ttf
+    - family: Animals
+      fonts:
+        - asset: assets/icons/animals.ttf
   # assets:
 
   # To add assets to your application, add an assets section, like this:
