@@ -1,4 +1,5 @@
 import 'package:digou/homepage.dart';
+import 'package:digou/pages/accountpages/registerpage.dart';
 import 'package:flui/flui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,8 +15,9 @@ class MainApp extends StatelessWidget {
       FLToastDefaults(position: FLToastPosition.top);
 
   final routes = {
-    '/homepage': (_) => HomePage(),
-    '/loginpage': (_) => LoginPage()
+    '/home': (_) => HomePage(),
+    '/login': (_) => LoginPage(),
+    '/register':(_) => RegisterPage()
   };
 
   @override
@@ -31,7 +33,7 @@ class MainApp extends StatelessWidget {
                   navigatorKey: navigatorKey,
                   title: '上地狗，就购了!',
                   routes: routes,
-                  initialRoute: '/loginpage',
+                  initialRoute: '/login',
                   theme: ctx.watch<AppProvider>().themeData,
                   themeMode: ctx.watch<AppProvider>().themeMode,
                   debugShowCheckedModeBanner: false,

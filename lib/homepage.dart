@@ -18,11 +18,13 @@ class HomePage extends StatelessWidget {
               showSelectedLabels: true,
               items: [
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.account_balance), label: '首页'),
+                    icon: Icon(IconData(0xe76a, fontFamily: 'Animals')),label:'首页'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_bag_outlined), label: '买一买'),
+                    icon: Icon(Icons.shopping_bag_outlined), label: '分类'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.comment_outlined), label: '看一看'),
+                    icon: Icon(Icons.comment_outlined), label: '消息'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.shopping_cart_outlined), label: '购物车'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.account_circle_outlined), label: '我的'),
               ],

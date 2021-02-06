@@ -7,6 +7,7 @@ class AppProvider extends ChangeNotifier {
   AppProvider({this.themeData}) {
     this.themeData ??= defaultThemeData;
     this.themeMode ??= ThemeMode.light;
+    initUIConfig();
   }
 
   void nextThemeMode() {

@@ -32,7 +32,7 @@ class AccountProvider extends ChangeNotifier {
           ..name = name;
         FLToast.success(text: '登录成功');
 
-        navigatorKey.currentState.pushNamed('/homepage');
+        navigatorKey.currentState.pushNamed('/home');
         _reverseIsLogining();
       });
     }
