@@ -20,8 +20,18 @@ class TrapezoidPath extends CustomClipper<Path> {
 }
 
 class LoginARegisterBG extends StatelessWidget {
+  String title;
   Widget child;
-  LoginARegisterBG({@required this.child});
+  double titleTop;
+  double titleLeft;
+  LoginARegisterBG(
+      {@required this.title,
+      @required this.child,
+      this.titleTop,
+      this.titleLeft}) {
+    this.titleTop ??= 120.w;
+    this.titleLeft ??= 50.w;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,10 +40,10 @@ class LoginARegisterBG extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: Stack(alignment: AlignmentDirectional.center, children: [
         Positioned(
-            top: 120.w,
-            left: 50.w,
+            top: titleTop,
+            left: titleLeft,
             child: Text(
-              '地狗地狗\n  什么都有！',
+              title,
               style: TextStyle(
                   fontSize: size40,
                   color: Colors.white,

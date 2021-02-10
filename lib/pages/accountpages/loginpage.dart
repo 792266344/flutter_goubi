@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:digou/mainapp.dart';
 import 'package:digou/widgets/login&registerBG.dart';
 import 'package:flui/flui.dart';
@@ -22,7 +23,8 @@ class LoginPage extends StatelessWidget {
     );
     final _pwdInput = TextField(
       controller: _pwdCtl,
-      decoration: InputDecoration(prefixIcon: Icon(Icons.lock_outline_rounded)),
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.lock_outline_rounded)),
     );
 
     final _loginBtn = Selector<AccountProvider, bool>(
@@ -43,7 +45,6 @@ class LoginPage extends StatelessWidget {
               height: 45.w,
               indicatorOnly: true,
               onPressed: () =>
-                  // channel.sink.add('sds'));
                   ctx.read<AccountProvider>().login(_unCtl.text, _pwdCtl.text));
         });
     final _loginPannel = Container(
@@ -68,9 +69,12 @@ class LoginPage extends StatelessWidget {
               height: 4.w,
             ),
             _unInput,
+            SizedBox(
+              height: 10.w,
+            ),
             _pwdInput,
             SizedBox(
-              height: 18.w,
+              height: 16.w,
             ),
             _loginBtn,
             SizedBox(
@@ -85,7 +89,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 InkWell(
                   child: Text('忘记密码？', style: linkStyle),
-                  onTap: () => FLToast.info(text: '暂未开放~'),
+                  onTap: () => BotToast.showText(text:'暂未开放~'),
                 ),
               ],
             )
@@ -96,8 +100,8 @@ class LoginPage extends StatelessWidget {
         builder: (ctx, child) => Scaffold(
             resizeToAvoidBottomPadding: false,
             body: LoginARegisterBG(
-              child: Container(
-                alignment: Alignment.center,
+              title: '地狗地狗\n  什么都有！',
+              child: Center(
                 child: _loginPannel,
               ),
             )));

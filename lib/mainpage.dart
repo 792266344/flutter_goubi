@@ -1,15 +1,15 @@
-import 'package:digou/providers/homeprovider.dart';
+import 'package:digou/providers/mainprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _bottomNavigationBar = Selector<HomeProvider, int>(
+    final _bottomNavigationBar = Selector<MainProvider, int>(
         selector: (ctx, pro) => pro.idx,
         builder: (ctx, idx, _) => BottomNavigationBar(
               currentIndex: idx,
-              onTap: ctx.read<HomeProvider>().setIdx,
+              onTap: ctx.read<MainProvider>().setIdx,
               type: BottomNavigationBarType.fixed,
               backgroundColor: Theme.of(context).primaryColor,
               iconSize: 20,
@@ -30,10 +30,10 @@ class HomePage extends StatelessWidget {
               ],
             ));
 
-    return ChangeNotifierProvider<HomeProvider>(
-        create: (ctx) => HomeProvider(),
+    return ChangeNotifierProvider<MainProvider>(
+        create: (ctx) => MainProvider(),
         builder: (ctx, _) => Scaffold(
-              body: Container(),
+              body: ctx.watch<MainProvider>().page,
               bottomNavigationBar: _bottomNavigationBar,
             ));
   }
