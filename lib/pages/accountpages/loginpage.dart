@@ -1,67 +1,31 @@
+import 'package:bot_toast/bot_toast.dart';
+import 'package:digou/mainapp.dart';
+import 'package:digou/widgets/login&registerBG.dart';
 import 'package:flui/flui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:digou/configs/ui_config.dart';
 import 'package:digou/providers/accountprovider.dart';
-import 'package:digou/providers/appprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class LoginPage extends StatelessWidget {
   TextEditingController _unCtl = TextEditingController();
   TextEditingController _pwdCtl = TextEditingController();
-  // final channel = IOWebSocketChannel.connect('ws://echo.websocket.org');
 
   @override
   Widget build(BuildContext context) {
-    final _unInput = Selector<AccountProvider, bool>(
-        selector: (o, n) => true,
-        builder: (ctx, t, child) {
-          return TextField(
-            controller: _unCtl,
-            decoration: InputDecoration(
-              fillColor: Colors.grey[100],
-              filled: true,
-              prefixIcon: Icon(Icons.account_circle,
-                  color: Colors.red, size: size24.r),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.r, horizontal: 20.r),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-            ),
-          );
-        });
-    final _pwdInput = Selector<AccountProvider, bool>(
-        selector: (o, n) => true,
-        builder: (ctx, t, child) {
-          return TextField(
-            onSubmitted: (input) {
-              // channel.sink.add(input);
-            },
-            controller: _pwdCtl,
-            decoration: InputDecoration(
-              fillColor: Colors.grey[100],
-              filled: true,
-              prefixIcon: Icon(Icons.lock, color: Colors.red, size: size24.r),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.r, horizontal: 20.r),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(circular12),
-              ),
-            ),
-          );
-        });
+    final _unInput = TextField(
+      controller: _unCtl,
+      decoration:
+          InputDecoration(prefixIcon: Icon(Icons.account_circle_outlined)),
+    );
+    final _pwdInput = TextField(
+      controller: _pwdCtl,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.lock_outline_rounded)),
+    );
 
     final _loginBtn = Selector<AccountProvider, bool>(
         selector: (ctx, pro) => pro.isLogining,
@@ -70,74 +34,76 @@ class LoginPage extends StatelessWidget {
               child: Text('进入地狗'),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(circular24)),
-              color: Theme.of(ctx).buttonColor,
-              disabledColor: Theme.of(ctx).buttonColor,
+              color: Theme.of(ctx).primaryColor,
+              disabledColor: Theme.of(ctx).primaryColor,
               indicatorColor: Colors.white,
               textColor: Colors.white,
               loading: isLogining,
               hoverElevation: evevation2,
               highlightElevation: evevation2,
-              minWidth: 200.r,
-              height: 45.r,
+              minWidth: 200.w,
+              height: 45.w,
               indicatorOnly: true,
               onPressed: () =>
-                  // ctx.read<AppProvider>().nextThemeMode());
                   ctx.read<AccountProvider>().login(_unCtl.text, _pwdCtl.text));
         });
+    final _loginPannel = Container(
+        width: 320.w,
+        height: 320.w,
+        padding: EdgeInsets.all(padding20),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Theme.of(context).shadowColor.withOpacity(opacity40),
+                  blurRadius: blurRadius8,
+                  spreadRadius: blurRadius4)
+            ],
+            borderRadius: BorderRadius.circular(circular20)),
+        child: Column(
+          children: [
+            Center(
+                child: Icon(IconData(0xe76a, fontFamily: 'Animals'),
+                    color: Theme.of(context).primaryColor, size: size60)),
+            SizedBox(
+              height: 4.w,
+            ),
+            _unInput,
+            SizedBox(
+              height: 10.w,
+            ),
+            _pwdInput,
+            SizedBox(
+              height: 16.w,
+            ),
+            _loginBtn,
+            SizedBox(
+              height: 16.w,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  child: Text('立即注册', style: linkStyle),
+                  onTap: () => navigatorKey.currentState.pushNamed('/register'),
+                ),
+                InkWell(
+                  child: Text('忘记密码？', style: linkStyle),
+                  onTap: () => BotToast.showText(text:'暂未开放~'),
+                ),
+              ],
+            )
+          ],
+        ));
     return ChangeNotifierProvider<AccountProvider>(
         create: (ctx) => AccountProvider(),
         builder: (ctx, child) => Scaffold(
-              resizeToAvoidBottomPadding: false,
-              body: Container(
-                alignment: Alignment.topCenter,
-                decoration: BoxDecoration(
-                    color: Colors.red[300]),
-                child: Container(
-                    width: 350.r,
-                    height: 310.r,
-                    margin: EdgeInsets.only(top: 200),
-                    padding: EdgeInsets.all(padding20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.white.withOpacity(opacity40),
-                              blurRadius: blurRadius8,
-                              spreadRadius: blurRadius4)
-                        ],
-                        borderRadius: BorderRadius.circular(circular20)),
-                    child: Column(
-                      children: [
-                        Text('请登录您的地狗账号~',
-                            style: Theme.of(ctx)
-                                .textTheme
-                                .headline5
-                                .copyWith(fontWeight: FontWeight.w500)),
-                        SizedBox(
-                          height: 18.r,
-                        ),
-                        _unInput,
-                        SizedBox(
-                          height: 18.r,
-                        ),
-                        _pwdInput,
-                        SizedBox(
-                          height: 18.r,
-                        ),
-                        _loginBtn,
-                        SizedBox(
-                          height: 16.r,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text('立即注册', style: linkStyle),
-                            Text('忘记密码?', style: linkStyle),
-                          ],
-                        )
-                      ],
-                    )),
+            resizeToAvoidBottomPadding: false,
+            body: LoginARegisterBG(
+              title: '地狗地狗\n  什么都有！',
+              child: Center(
+                child: _loginPannel,
               ),
-            ));
+            )));
   }
 }

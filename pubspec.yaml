@@ -34,6 +34,9 @@ dependencies:
   flui: ^0.9.2
   web_socket_channel: ^1.2.0
   flutter_screenutil: ^4.0.2+3
+  bot_toast: 3.0.5
+  flutter_swiper: ^1.1.6
+  # flutter_svg: 0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +52,19 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: Male
+      fonts:
+        - asset: assets/icons/male_head.ttf
+    - family: FeMale
+      fonts:
+        - asset: assets/icons/female_head.ttf
+    - family: Animals
+      fonts:
+        - asset: assets/icons/animals.ttf
+    - family: ZCOOL
+      fonts:
+        - asset: assets/fonts/ZCOOLKuaiLe-Regular.ttf
   # assets:
 
   # To add assets to your application, add an assets section, like this:

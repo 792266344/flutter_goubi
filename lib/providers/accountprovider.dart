@@ -1,5 +1,10 @@
 import 'dart:io';
 
+import 'package:bot_toast/bot_toast.dart';
+import 'package:digou/configs/serviceurl.dart';
+import 'package:digou/helpers/dioHelper.dart';
+import 'package:digou/models/webmodels/response.dart';
+import 'package:dio/dio.dart';
 import 'package:flui/flui.dart';
 import 'package:digou/models/accountmodels/account.dart';
 import 'package:flutter/material.dart';
@@ -15,22 +20,29 @@ class AccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void login(String name, String password) async {
+  void login(String name, String passWord) async {
     if (name.isEmpty) {
-      FLToast.info(text: '请输入账号~');
-    } else if (password.isEmpty) {
-      FLToast.info(text: '请输入密码~');
+      BotToast.showText(text: '请输入账号~');
+    } else if (passWord.isEmpty) {
+      BotToast.showText(text: '请输入密码~');
     } else {
       _reverseIsLogining();
-      Future.delayed(Duration(seconds: 3)).then((res) {
-        account = Account()
-          ..id = ''
-          ..name = name;
-        FLToast.success(text: '登录成功');
-
-        navigatorKey.currentState.pushNamed('/homepage');
-        _reverseIsLogining();
+      Http.post(DiGouAccount.login,
+          formData: {'userName': name, 'passWord': passWord}).then((data) {
+        var res = CommonResponse.fromJson(data);
+        if (res.isOk) {
+          BotToast.showText(text: '登录成功~');
+          Http.login(res.getString('token'), '');
+          account = Account()
+            ..id = ''
+            ..name = name;
+          navigatorKey.currentState
+              .pushNamedAndRemoveUntil('/home', (route) => false);
+        } else {
+          BotToast.showText(text: res.message);
+        }
       });
+      _reverseIsLogining();
     }
   }
 }
